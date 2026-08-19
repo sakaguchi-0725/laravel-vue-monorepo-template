@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-ssr
+coverage
+pnpm-lock.yaml
+
+.claude
+apps/api
+
+*.md

@@ -2,6 +2,13 @@
   "name": "laravel-vue-monorepo-template",
   "private": true,
   "type": "module",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "catalog:"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
