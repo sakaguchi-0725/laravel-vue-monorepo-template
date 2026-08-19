@@ -5,6 +5,8 @@ import { globalIgnores } from 'eslint/config'
 import pluginVue from 'eslint-plugin-vue'
 import globals from 'globals'
 
+import { defineFsdConfig } from './fsd.ts'
+
 type ConfigInput = Parameters<typeof withVueTs>[1]
 
 export const defineAppConfig = (rootDir: string, ...overrides: ConfigInput[]) =>
@@ -37,5 +39,6 @@ export const defineAppConfig = (rootDir: string, ...overrides: ConfigInput[]) =>
         'vue/component-name-in-template-casing': ['error', 'PascalCase'],
       },
     },
+    defineFsdConfig(rootDir),
     ...overrides,
   )
