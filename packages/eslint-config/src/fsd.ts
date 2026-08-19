@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 import { createConfig } from 'eslint-plugin-boundaries/config'
 
 const DIRECTION_MESSAGE =
@@ -6,9 +8,23 @@ const DIRECTION_MESSAGE =
 const SLICE_MESSAGE =
   'FSD slice isolation violated: `{{from.element.type}}/{{from.element.captured.slice}}` must not import the sibling slice `{{to.element.type}}/{{to.element.captured.slice}}`.'
 
-export const defineFsdConfig = (rootDir: string) =>
+const defineResolverConfig = (rootDir: string) => ({
+  name: 'fsd/resolver',
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: path.join(rootDir, 'tsconfig.app.json'),
+        extensions: ['.ts', '.tsx', '.vue', '.js'],
+      },
+    },
+  },
+})
+
+export const defineFsdConfig = (rootDir: string) => [
+  defineResolverConfig(rootDir),
   createConfig({
     name: 'fsd',
+    files: ['**/*.{ts,mts,tsx,vue}'],
     settings: {
       'boundaries/root-path': rootDir,
       'boundaries/elements': [
@@ -51,4 +67,5 @@ export const defineFsdConfig = (rootDir: string) =>
         },
       ],
     },
-  })
+  }),
+]

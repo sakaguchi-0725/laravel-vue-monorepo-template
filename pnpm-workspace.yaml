@@ -11,6 +11,7 @@ catalog:
   '@vue/eslint-config-typescript': ^14.9.0
   '@vue/tsconfig': ^0.9.1
   eslint: ^10.8.1
+  eslint-import-resolver-typescript: ^4.4.5
   eslint-plugin-boundaries: ^7.2.0
   eslint-plugin-vue: ^10.10.0
   globals: ^17.11.0
@@ -23,3 +24,4 @@ catalog:
 
 allowBuilds:
   esbuild: true
+  unrs-resolver: true

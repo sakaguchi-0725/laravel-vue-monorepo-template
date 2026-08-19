@@ -10,6 +10,7 @@
     "@eslint/js": "catalog:",
     "@vue/eslint-config-prettier": "catalog:",
     "@vue/eslint-config-typescript": "catalog:",
+    "eslint-import-resolver-typescript": "catalog:",
     "eslint-plugin-boundaries": "catalog:",
     "eslint-plugin-vue": "catalog:",
     "globals": "catalog:"

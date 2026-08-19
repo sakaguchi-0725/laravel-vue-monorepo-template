@@ -39,6 +39,6 @@ export const defineAppConfig = (rootDir: string, ...overrides: ConfigInput[]) =>
         'vue/component-name-in-template-casing': ['error', 'PascalCase'],
       },
     },
-    defineFsdConfig(rootDir),
+    ...defineFsdConfig(rootDir),
     ...overrides,
   )
