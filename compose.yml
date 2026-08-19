@@ -6,7 +6,7 @@ services:
     volumes:
       - ./apps/api:/app
     ports:
-      - "8000:8000"
+      - '8000:8000'
     environment:
       DB_CONNECTION: mysql
       DB_HOST: db
@@ -26,11 +26,11 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
     ports:
-      - "3306:3306"
+      - '3306:3306'
     volumes:
       - db-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-ppassword"]
+      test: ['CMD', 'mysqladmin', 'ping', '-h', '127.0.0.1', '-uroot', '-ppassword']
       interval: 5s
       timeout: 5s
       retries: 20
