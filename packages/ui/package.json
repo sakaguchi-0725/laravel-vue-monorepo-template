@@ -1,0 +1,20 @@
+{
+  "name": "@repo/ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "type-check": "vue-tsc --build"
+  },
+  "devDependencies": {
+    "@vue/tsconfig": "catalog:",
+    "typescript": "catalog:",
+    "vue-tsc": "catalog:"
+  },
+  "peerDependencies": {
+    "vue": "catalog:"
+  }
+}

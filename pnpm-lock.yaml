@@ -279,6 +279,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@vee-validate/zod':
         specifier: 'catalog:'
         version: 4.15.1(vue@3.5.41(typescript@6.0.3))(zod@4.4.3)
@@ -325,6 +328,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@vee-validate/zod':
         specifier: 'catalog:'
         version: 4.15.1(vue@3.5.41(typescript@6.0.3))(zod@4.4.3)
@@ -402,6 +408,22 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+
+  packages/ui:
+    dependencies:
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.41(typescript@6.0.3)
+    devDependencies:
+      '@vue/tsconfig':
+        specifier: 'catalog:'
+        version: 0.9.1(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3))
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      vue-tsc:
+        specifier: 'catalog:'
+        version: 3.3.10(typescript@6.0.3)
 
 packages:
 

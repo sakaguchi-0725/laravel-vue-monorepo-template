@@ -3,6 +3,8 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { ref } from 'vue'
 
+import { PrimaryButton } from '@repo/ui'
+
 import { schema, type Form } from '../model/schema'
 
 const { defineField, errors, handleSubmit } = useForm<Form>({
@@ -36,7 +38,7 @@ const onSubmit = handleSubmit((values) => {
         <p v-if="errors.email" class="error">{{ errors.email }}</p>
       </div>
 
-      <button class="submit" type="submit">送信</button>
+      <PrimaryButton type="submit">送信</PrimaryButton>
     </form>
 
     <p v-if="submitted" class="result">
@@ -89,14 +91,8 @@ const onSubmit = handleSubmit((values) => {
   color: #dc2626;
 }
 
-.submit {
+.form :deep(.button) {
   justify-self: start;
-  padding: 0.5rem 1.25rem;
-  border: none;
-  border-radius: 0.375rem;
-  background-color: #4f46e5;
-  color: #fff;
-  font-weight: 600;
 }
 
 .result {

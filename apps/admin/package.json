@@ -12,6 +12,7 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
+    "@repo/ui": "workspace:*",
     "@vee-validate/zod": "catalog:",
     "vee-validate": "catalog:",
     "vue": "catalog:",
