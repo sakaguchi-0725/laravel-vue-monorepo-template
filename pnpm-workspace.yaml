@@ -4,9 +4,16 @@ packages:
   - packages/*
 
 catalog:
+  '@eslint/js': ^10.0.1
   '@types/node': ^24.13.3
   '@vitejs/plugin-vue': ^6.0.8
+  '@vue/eslint-config-prettier': ^10.2.0
+  '@vue/eslint-config-typescript': ^14.9.0
   '@vue/tsconfig': ^0.9.1
+  eslint: ^10.8.1
+  eslint-plugin-vue: ^10.10.0
+  globals: ^17.11.0
+  jiti: ^2.7.0
   prettier: ^3.9.6
   typescript: ~6.0.2
   vite: ^8.2.0
