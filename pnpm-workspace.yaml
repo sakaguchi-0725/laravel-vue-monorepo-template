@@ -21,5 +21,5 @@ catalog:
   vue: ^3.5.40
   vue-tsc: ^3.3.8
 
-onlyBuiltDependencies:
-  - esbuild
+allowBuilds:
+  esbuild: true
