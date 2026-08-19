@@ -6,6 +6,7 @@ packages:
 catalog:
   '@eslint/js': ^10.0.1
   '@types/node': ^24.13.3
+  '@vee-validate/zod': ^4.15.1
   '@vitejs/plugin-vue': ^6.0.8
   '@vue/eslint-config-prettier': ^10.2.0
   '@vue/eslint-config-typescript': ^14.9.0
@@ -18,9 +19,12 @@ catalog:
   jiti: ^2.7.0
   prettier: ^3.9.6
   typescript: ~6.0.2
+  vee-validate: ^4.15.1
   vite: ^8.2.0
   vue: ^3.5.40
+  vue-router: ^5.2.0
   vue-tsc: ^3.3.8
+  zod: ^4.4.3
 
 allowBuilds:
   esbuild: true

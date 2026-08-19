@@ -12,7 +12,11 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
-    "vue": "catalog:"
+    "@vee-validate/zod": "catalog:",
+    "vee-validate": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
