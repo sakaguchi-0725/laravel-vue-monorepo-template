@@ -3,6 +3,7 @@
     "target": "es2023",
     "lib": ["ES2023"],
     "skipLibCheck": true,
+    "types": ["node"],
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "allowImportingTsExtensions": true,
