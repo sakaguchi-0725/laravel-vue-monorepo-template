@@ -41,7 +41,7 @@ paths:
 
 ## 命名
 
-- クラス名は役割を表す suffix で固定する（`〜Controller` / `〜Request` / `〜Resource` / `〜Policy`）
+- クラス名は役割を表す suffix で固定する（`〜Controller` / `〜Request` / `〜Resource` / `〜UseCase`）
 - コントローラ名は単数形にする（`UserController`）
 - イベントは時制で表す。発生前は `ApprovingLoan`、発生後は `LoanApproved`
 - 公開されない文字列は camelCase。config のキーのみ snake_case
