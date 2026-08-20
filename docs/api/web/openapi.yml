@@ -1,0 +1,20 @@
+openapi: 3.1.0
+
+info:
+  title: App Web API
+  version: 0.0.0
+  description: ユーザー向けフロントエンドが利用するAPI。
+
+servers:
+  - url: http://localhost:8000
+    description: ローカル開発環境
+
+security: []
+
+tags:
+  - name: Example
+    description: 動作確認用のエンドポイント。
+
+paths:
+  /examples:
+    $ref: './paths/example.yml'

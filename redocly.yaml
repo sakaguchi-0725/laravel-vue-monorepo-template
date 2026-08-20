@@ -1,0 +1,9 @@
+extends:
+  - recommended
+
+rules:
+  no-unused-components: error
+  operation-operationId: error
+  operation-4xx-response: error
+  info-license: off
+  info-license-strict: off

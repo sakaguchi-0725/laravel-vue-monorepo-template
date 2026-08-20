@@ -1,0 +1,20 @@
+openapi: 3.1.0
+
+info:
+  title: App Admin API
+  version: 0.0.0
+  description: 管理者向けフロントエンドが利用するAPI。
+
+servers:
+  - url: http://localhost:8000
+    description: ローカル開発環境
+
+security: []
+
+tags:
+  - name: Example
+    description: 動作確認用のエンドポイント。
+
+paths:
+  /admin/examples:
+    $ref: './paths/example.yml'

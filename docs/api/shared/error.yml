@@ -1,0 +1,36 @@
+components:
+  schemas:
+    ErrorCode:
+      type: string
+      description: エラーの種別を示すコード。
+      enum:
+        - INVALID_ARGUMENTS
+
+    Error:
+      type: object
+      description: エラーレスポンスの共通スキーマ。
+      required:
+        - code
+        - message
+      properties:
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+        message:
+          type: string
+          description: エラーの内容を説明するメッセージ。
+          examples:
+            - リクエストの内容が正しくありません。
+
+  responses:
+    BadRequest:
+      description: リクエストの内容が不正。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            invalidArguments:
+              summary: 入力値が不正
+              value:
+                code: INVALID_ARGUMENTS
+                message: リクエストの内容が正しくありません。

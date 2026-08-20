@@ -1,3 +1,7 @@
 [tools]
 node = "26.7.0"
 pnpm = "11.22.0"
+
+[tasks."api:lint"]
+description = "OpenAPI仕様書のlint"
+run = "pnpm --package=@redocly/cli dlx redocly lint docs/api/web/openapi.yml docs/api/admin/openapi.yml"
