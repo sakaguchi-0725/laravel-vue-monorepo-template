@@ -1,0 +1,11 @@
+[tasks.format]
+description = "PHPコードの整形（Pint）"
+run = "docker compose exec api composer run format"
+
+[tasks."format:check"]
+description = "PHPコードの整形チェック（Pint、書き換えなし）"
+run = "docker compose exec api composer run format:check"
+
+[tasks.lint]
+description = "PHPの静的解析（PHPStan / Larastan / PHPat）"
+run = "docker compose exec api composer run lint"

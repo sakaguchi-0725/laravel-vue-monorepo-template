@@ -1,0 +1,35 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpat/phpat/extension.neon
+
+parameters:
+    level: max
+
+    paths:
+        - app
+        - config
+        - database
+        - routes
+
+    phpat:
+        ignore_built_in_classes: true
+
+services:
+    -
+        class: Tests\Architecture\LayerDependencyTest
+        tags:
+            - phpat.test
+    -
+        class: Tests\Architecture\UseCaseTest
+        tags:
+            - phpat.test
+    -
+        class: Tests\Architecture\HttpTest
+        tags:
+            - phpat.test
+    -
+        class: Tests\Architecture\ExternalsTest
+        tags:
+            - phpat.test
