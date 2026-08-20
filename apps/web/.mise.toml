@@ -1,0 +1,7 @@
+[tasks."api:docs"]
+description = "OpenAPI仕様書からHTMLドキュメントを生成して開く"
+run = "pnpm --package=@redocly/cli dlx redocly build-docs ../../docs/api/web/openapi.yml --output ../../docs/api/web.html && open ../../docs/api/web.html"
+
+[tasks."api:gen"]
+description = "OpenAPI仕様書からTypeScriptの型を生成"
+run = "pnpm exec openapi-typescript ../../docs/api/web/openapi.yml --output src/shared/api/schema.ts --export-type"

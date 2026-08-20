@@ -26,6 +26,7 @@
     "@vue/tsconfig": "catalog:",
     "eslint": "catalog:",
     "jiti": "catalog:",
+    "openapi-typescript": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vue-tsc": "catalog:"
