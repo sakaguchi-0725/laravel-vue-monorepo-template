@@ -60,8 +60,10 @@ apps/api/app/
 
 ## Http 層
 
-- `Http/` の直下は Admin / Web で分け、その下をドメインで分ける。ただし `Http/Controllers/` と
-  `Http/Errors/` は Admin / Web のどちらにも属さない共通部品として例外的に直下に置く
+- `Http/` の直下は Admin / Web で分け、その下をドメインで分ける。ただし `Http/Errors/` は
+  Admin / Web のどちらにも属さない共通部品として例外的に直下に置く
+- コントローラーに基底クラスを作らない。ドメインディレクトリ直下に置くのはコントローラーのみで、
+  他のクラスを置かない
 - コントローラーが使う FormRequest と Resource は、そのコントローラーと同じドメインディレクトリの `Requests/` `Resources/` に置く。`Http/Requests/` `Http/Resources/` のような技術的関心を最上位に置いたディレクトリは作らない
 - Admin と Web で Request / Resource を共有しない。同じ形になっていても、公開する項目とバリデーションは画面ごとに変わるため、それぞれの配下に定義する
 - コントローラーの責務は「リクエストを UseCase の Input DTO に変換する」「UseCase を呼ぶ」「戻ってきた Output DTO を Resource に渡す」の3つのみ。それ以外の処理を書かない

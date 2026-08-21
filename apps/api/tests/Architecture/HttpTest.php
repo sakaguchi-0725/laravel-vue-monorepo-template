@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Architecture;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
 use PHPat\Selector\Selector;
@@ -36,10 +35,10 @@ class HttpTest
     public function test_controllers_are_named_with_controller_suffix(): Rule
     {
         return PHPat::rule()
-            ->classes(Selector::extends(Controller::class))
+            ->classes(Selector::classname('/^App\\\\Http\\\\(Admin|Web)\\\\[^\\\\]+\\\\[^\\\\]+$/', true))
             ->should()
             ->beNamed('/.+Controller$/', true)
-            ->because('クラス名は役割を表す suffix で固定する');
+            ->because('ドメインディレクトリ直下に置くのはコントローラーのみで、クラス名は役割を表す suffix で固定する');
     }
 
     public function test_form_requests_are_named_with_request_suffix(): Rule
