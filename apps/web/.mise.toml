@@ -1,3 +1,10 @@
+[tasks.setup]
+description = "初期セットアップ（.env作成、Playwrightのブラウザ取得）"
+run = [
+  "test -f .env || cp .env.example .env",
+  "pnpm exec playwright install chromium",
+]
+
 [tasks."api:docs"]
 description = "OpenAPI仕様書からHTMLドキュメントを生成して開く"
 run = "pnpm --package=@redocly/cli dlx redocly build-docs ../../docs/api/web/openapi.yml --output ../../docs/api/web.html && open ../../docs/api/web.html"
@@ -13,3 +20,7 @@ run = "pnpm storybook"
 [tasks.test]
 description = "Storybookのplay関数テスト（vitest browser）を実行"
 run = "pnpm test-storybook"
+
+[tasks."lint:staged"]
+description = "指定ファイルにESLintを実行する（lefthook用）"
+run = "pnpm exec eslint --no-warn-ignored $@"

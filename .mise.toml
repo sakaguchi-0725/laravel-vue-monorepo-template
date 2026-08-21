@@ -1,6 +1,17 @@
 [tools]
 node = "26.7.0"
 pnpm = "11.22.0"
+lefthook = "2.1.10"
+
+[tasks.setup]
+description = "依存のインストール、git hooksの登録、各アプリのセットアップ"
+run = [
+  "pnpm install",
+  "lefthook install",
+  "mise -C apps/web run setup",
+  "mise -C apps/admin run setup",
+  "mise -C apps/api run setup",
+]
 
 [tasks."docker:up"]
 description = "コンテナの起動"
@@ -25,3 +36,7 @@ pnpm --package=@redocly/cli dlx redocly build-docs docs/api/web/openapi.yml -o d
 pnpm --package=@redocly/cli dlx redocly build-docs docs/api/admin/openapi.yml -o docs/api/admin.html
 open docs/api/web.html docs/api/admin.html
 """
+
+[tasks."format:staged"]
+description = "指定ファイルをPrettierで整形する（lefthook用）"
+run = "pnpm exec prettier --write $@"

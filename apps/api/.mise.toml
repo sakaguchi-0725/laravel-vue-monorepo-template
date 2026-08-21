@@ -37,3 +37,7 @@ run = "docker compose exec api composer run format:check"
 [tasks.lint]
 description = "PHPの静的解析（PHPStan / Larastan / PHPat）"
 run = "docker compose exec api composer run lint"
+
+[tasks."format:staged"]
+description = "指定ファイルをPintで整形する（lefthook用）"
+run = "docker compose exec -T api ./vendor/bin/pint $@"
