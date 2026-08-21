@@ -17,3 +17,11 @@ run = "docker compose logs -f api"
 [tasks."api:lint"]
 description = "OpenAPI仕様書のlint"
 run = "pnpm --package=@redocly/cli dlx redocly lint docs/api/web/openapi.yml docs/api/admin/openapi.yml"
+
+[tasks."api:docs"]
+description = "OpenAPI仕様書のHTMLドキュメント生成"
+run = """
+pnpm --package=@redocly/cli dlx redocly build-docs docs/api/web/openapi.yml -o docs/api/web.html
+pnpm --package=@redocly/cli dlx redocly build-docs docs/api/admin/openapi.yml -o docs/api/admin.html
+open docs/api/web.html docs/api/admin.html
+"""
