@@ -1,0 +1,11 @@
+{
+    "composer.autoloader_path": "%project_root%/apps/api/vendor/autoload.php",
+    "indexer.include_patterns": ["/apps/api/**/*.php"],
+    "indexer.exclude_patterns": [
+        "/apps/api/vendor/**/Tests/**/*",
+        "/apps/api/vendor/**/tests/**/*",
+        "/apps/api/vendor/composer/**/*",
+        "/**/node_modules/**/*"
+    ],
+    "language_server_worse_reflection.diagnostics.enable": false
+}
