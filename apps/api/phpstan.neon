@@ -33,3 +33,7 @@ services:
         class: Tests\Architecture\ExternalsTest
         tags:
             - phpat.test
+    -
+        class: Tests\Architecture\ExceptionTest
+        tags:
+            - phpat.test

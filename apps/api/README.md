@@ -36,6 +36,7 @@ mise run setup
 - `UseCases/`: ユースケース1つ分の処理。業務ロジック、認可、トランザクション境界
 - `Models/`: Eloquent モデル。永続化とデータ取得
 - `Externals/`: 外部サービス連携
+- `Exceptions/`: 業務例外。エラーの種別だけを持ち、HTTP ステータスは知らない
 - `Providers/`: サービスコンテナへの登録
 
 ```
@@ -53,6 +54,8 @@ apps/api/app/
         TaskController.php
         Requests/
         Resources/
+    Errors/
+      ErrorResponseFactory.php
   UseCases/
     DomainA/
       Dto/
@@ -63,6 +66,10 @@ apps/api/app/
   Models/
     Task.php
     User.php
+  Exceptions/
+    ErrorCode.php
+    ApplicationException.php
+    NotFoundException.php
   Externals/
     ServiceA/
       Dto/

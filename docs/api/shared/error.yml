@@ -5,6 +5,10 @@ components:
       description: エラーの種別を示すコード。
       enum:
         - INVALID_ARGUMENTS
+        - PERMISSION_DENIED
+        - NOT_FOUND
+        - CONFLICT
+        - INTERNAL_ERROR
 
     Error:
       type: object
@@ -34,3 +38,55 @@ components:
               value:
                 code: INVALID_ARGUMENTS
                 message: リクエストの内容が正しくありません。
+
+    Forbidden:
+      description: 操作の権限がない。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            permissionDenied:
+              summary: 権限なし
+              value:
+                code: PERMISSION_DENIED
+                message: この操作を行う権限がありません。
+
+    NotFound:
+      description: 対象が存在しない。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            notFound:
+              summary: 未存在
+              value:
+                code: NOT_FOUND
+                message: 対象が見つかりません。
+
+    Conflict:
+      description: 現在の状態では操作できない。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            conflict:
+              summary: 状態競合
+              value:
+                code: CONFLICT
+                message: 現在の状態ではこの操作を行えません。
+
+    InternalServerError:
+      description: サーバー内部のエラー。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            internalError:
+              summary: 内部エラー
+              value:
+                code: INTERNAL_ERROR
+                message: サーバー内部でエラーが発生しました。
