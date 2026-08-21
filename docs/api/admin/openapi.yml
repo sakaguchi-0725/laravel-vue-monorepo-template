@@ -14,7 +14,11 @@ security: []
 tags:
   - name: Example
     description: 動作確認用のエンドポイント。
+  - name: Todo
+    description: タスク関連のエンドポイント。
 
 paths:
   /admin/examples:
     $ref: './paths/example.yml'
+  /admin/todos:
+    $ref: './paths/todo.yml#/collection'

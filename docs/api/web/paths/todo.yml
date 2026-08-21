@@ -1,0 +1,136 @@
+# ── パス定義 ──
+collection:
+  get:
+    operationId: ListTodos
+    summary: タスク一覧を取得する
+    description: |
+      タスクを期限日の昇順で返す。
+
+      期限日が未設定のタスクは末尾に並ぶ。
+    tags:
+      - Todo
+    parameters:
+      - name: status
+        in: query
+        required: false
+        description: |
+          指定したステータスのタスクだけに絞り込む。
+
+          省略した場合はすべてのステータスを返す。
+        schema:
+          $ref: '#/TodoStatus'
+    responses:
+      '200':
+        description: 取得成功
+        content:
+          application/json:
+            schema:
+              $ref: '#/ListTodosResponse'
+      '400':
+        $ref: '../../shared/error.yml#/components/responses/BadRequest'
+  post:
+    operationId: CreateTodo
+    summary: タスクを作成する
+    description: |
+      タスクを新規作成する。
+
+      作成直後のステータスは常に `pending` になる。
+    tags:
+      - Todo
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/CreateTodoRequest'
+    responses:
+      '201':
+        description: 作成成功
+        content:
+          application/json:
+            schema:
+              $ref: '#/Todo'
+      '400':
+        $ref: '../../shared/error.yml#/components/responses/BadRequest'
+
+# ── ドメイン固有スキーマ ──
+TodoStatus:
+  type: string
+  description: |
+    タスクのステータス。
+
+    `pending` は未完了、`done` は完了を表す。
+  enum:
+    - pending
+    - done
+  examples:
+    - pending
+
+Todo:
+  type: object
+  description: タスク。
+  required:
+    - id
+    - title
+    - description
+    - status
+    - dueOn
+  properties:
+    id:
+      type: integer
+      description: タスクのID。
+      examples:
+        - 1
+    title:
+      type: string
+      description: タスクの件名。
+      examples:
+        - 請求書を送付する
+    description:
+      type: [string, 'null']
+      description: タスクの詳細説明。
+      examples:
+        - 今月分の請求書をPDFにして送る。
+    status:
+      $ref: '#/TodoStatus'
+    dueOn:
+      type: [string, 'null']
+      format: date
+      description: 期限日。
+      examples:
+        - '2026-09-30'
+
+ListTodosResponse:
+  type: object
+  required:
+    - todos
+  properties:
+    todos:
+      type: array
+      description: タスクの一覧。
+      items:
+        $ref: '#/Todo'
+
+CreateTodoRequest:
+  type: object
+  required:
+    - title
+  properties:
+    title:
+      type: string
+      description: タスクの件名。
+      minLength: 1
+      maxLength: 100
+      examples:
+        - 請求書を送付する
+    description:
+      type: [string, 'null']
+      description: タスクの詳細説明。
+      examples:
+        - 今月分の請求書をPDFにして送る。
+    dueOn:
+      type: [string, 'null']
+      format: date
+      description: 期限日。
+      examples:
+        - '2026-09-30'
