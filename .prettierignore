@@ -8,5 +8,6 @@ pnpm-lock.yaml
 apps/api
 *.html
 apps/*/src/shared/api/schema.ts
+apps/*/public/mockServiceWorker.js
 
 *.md

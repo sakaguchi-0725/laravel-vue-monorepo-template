@@ -12,7 +12,13 @@ type ConfigInput = Parameters<typeof withVueTs>[1]
 export const defineAppConfig = (rootDir: string, ...overrides: ConfigInput[]) =>
   withVueTs(
     { rootDir },
-    globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', 'src/shared/api/schema.ts']),
+    globalIgnores([
+      '**/dist/**',
+      '**/dist-ssr/**',
+      '**/coverage/**',
+      '**/storybook-static/**',
+      'src/shared/api/schema.ts',
+    ]),
     { files: ['**/*.{ts,mts,tsx,vue}'] },
     js.configs.recommended,
     pluginVue.configs['flat/recommended'],

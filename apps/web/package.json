@@ -9,7 +9,10 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "type-check": "vue-tsc --build"
+    "type-check": "vue-tsc --build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test-storybook": "vitest run --project=storybook"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
@@ -22,14 +25,28 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@storybook/addon-vitest": "catalog:",
+    "@storybook/vue3-vite": "catalog:",
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
     "@vue/tsconfig": "catalog:",
     "eslint": "catalog:",
     "jiti": "catalog:",
+    "msw": "catalog:",
+    "msw-storybook-addon": "catalog:",
+    "openapi-msw": "catalog:",
     "openapi-typescript": "catalog:",
+    "playwright": "catalog:",
+    "storybook": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
+    "vitest": "catalog:",
     "vue-tsc": "catalog:"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

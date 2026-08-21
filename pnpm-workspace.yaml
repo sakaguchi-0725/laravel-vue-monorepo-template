@@ -7,9 +7,12 @@ catalogMode: strict
 
 catalog:
   '@eslint/js': ^10.0.1
+  '@storybook/addon-vitest': ^10.5.10
+  '@storybook/vue3-vite': ^10.5.10
   '@types/node': ^24.13.3
   '@vee-validate/zod': ^4.15.1
   '@vitejs/plugin-vue': ^6.0.8
+  '@vitest/browser-playwright': ^4.1.11
   '@vue/eslint-config-prettier': ^10.2.0
   '@vue/eslint-config-typescript': ^14.9.0
   '@vue/tsconfig': ^0.9.1
@@ -19,12 +22,18 @@ catalog:
   eslint-plugin-vue: ^10.10.0
   globals: ^17.11.0
   jiti: ^2.7.0
+  msw: ^2.15.0
+  msw-storybook-addon: ^2.0.7
   openapi-fetch: ^0.17.0
+  openapi-msw: ^2.0.0
   openapi-typescript: ^7.13.0
+  playwright: ^1.62.1
   prettier: ^3.9.6
+  storybook: ^10.5.10
   typescript: ~6.0.2
   vee-validate: ^4.15.1
   vite: ^8.2.0
+  vitest: ^4.1.11
   vue: ^3.5.40
   vue-router: ^5.2.0
   vue-tsc: ^3.3.8
@@ -32,4 +41,13 @@ catalog:
 
 allowBuilds:
   esbuild: true
+  msw: true
   unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - '@storybook/addon-vitest@10.5.10'
+  - '@storybook/builder-vite@10.5.10'
+  - '@storybook/csf-plugin@10.5.10'
+  - '@storybook/vue3-vite@10.5.10'
+  - '@storybook/vue3@10.5.10'
+  - storybook@10.5.10

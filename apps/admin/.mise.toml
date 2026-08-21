@@ -5,3 +5,11 @@ run = "pnpm --package=@redocly/cli dlx redocly build-docs ../../docs/api/admin/o
 [tasks."api:gen"]
 description = "OpenAPI仕様書からTypeScriptの型を生成"
 run = "pnpm exec openapi-typescript ../../docs/api/admin/openapi.yml --output src/shared/api/schema.ts --export-type"
+
+[tasks.storybook]
+description = "Storybookを起動"
+run = "pnpm storybook"
+
+[tasks.test]
+description = "Storybookのplay関数テスト（vitest browser）を実行"
+run = "pnpm test-storybook"
