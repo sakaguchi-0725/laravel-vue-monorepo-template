@@ -7,6 +7,15 @@ includes:
 parameters:
     level: max
 
+    # casts() メソッドの内容を解析させる。既定の false では属性の型が
+    # マイグレーションのカラム型のままになり、enum / date キャストが効かない
+    parseModelCastsMethod: true
+
+    strictRules:
+        # Eloquent のクエリビルダは larastan が静的メソッドとして型付けするため、
+        # $query->orderBy() のようなチェーンがすべて誤検出になる
+        dynamicCallOnStaticMethod: false
+
     paths:
         - app
         - config
