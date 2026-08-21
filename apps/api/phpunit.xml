@@ -31,6 +31,11 @@
         <env name="DB_USERNAME" value="app" force="true"/>
         <env name="DB_PASSWORD" value="password" force="true"/>
         <env name="DB_URL" value="" force="true"/>
+        <!-- 突き合わせ先の OpenAPI 定義は apps/api の外にあり、compose.yml が /spec に渡している -->
+        <env name="SPEC_SOURCE" value="local"/>
+        <env name="SPEC_PATH" value="/spec"/>
+        <!-- ルートは api プレフィックス配下だが、spec の paths は /api を含まない -->
+        <env name="SPECTATOR_PATH_PREFIX" value="api"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>

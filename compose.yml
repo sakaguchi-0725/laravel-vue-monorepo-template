@@ -5,6 +5,9 @@ services:
       target: dev
     volumes:
       - ./apps/api:/app
+      # 契約テストは実レスポンスを docs/api の OpenAPI 定義と突き合わせるため、
+      # apps/api しか見えない api コンテナに定義を渡す。テストからは書き換えないので ro。
+      - ./docs/api:/spec:ro
     ports:
       - '8000:8000'
     environment:
