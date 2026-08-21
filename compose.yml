@@ -17,6 +17,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      test-db:
+        condition: service_healthy
 
   db:
     image: mysql:8.4
@@ -35,5 +37,30 @@ services:
       timeout: 5s
       retries: 20
 
+  test-db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_USER: app
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    configs:
+      - source: test-db-init
+        target: /docker-entrypoint-initdb.d/init.sql
+    tmpfs:
+      - /var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', '127.0.0.1', '-uroot', '-ppassword']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
 volumes:
   db-data:
+
+configs:
+  # 並列テストでは Laravel が app_test_1, app_test_2 ... を実行時に作成する。
+  # MYSQL_USER で自動付与されるのは app DB のみの権限なので、テスト用DBのパターンにも権限を与える。
+  test-db-init:
+    content: |
+      GRANT ALL PRIVILEGES ON `app\_test\_%`.* TO 'app'@'%';
