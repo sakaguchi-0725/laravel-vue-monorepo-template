@@ -1,3 +1,27 @@
+[tasks.setup]
+description = "初期セットアップ（.env作成、マイグレーション）"
+depends = ["docker:up"]
+run = [
+  "test -f .env || cp .env.example .env",
+  "docker compose exec api php artisan migrate",
+]
+
+[tasks."migrate:new"]
+description = "マイグレーションファイルの作成"
+run = "docker compose exec api php artisan make:migration {{arg(name=\"name\")}}"
+
+[tasks."migrate:up"]
+description = "マイグレーションの適用"
+run = "docker compose exec api php artisan migrate"
+
+[tasks."migrate:down"]
+description = "マイグレーションを1つ戻す"
+run = "docker compose exec api php artisan migrate:rollback --step=1"
+
+[tasks.test]
+description = "テストの実行（PHPUnit / paratest による並列実行）"
+run = "docker compose exec api php artisan test --parallel"
+
 [tasks.format]
 description = "PHPコードの整形（Pint）"
 run = "docker compose exec api composer run format"
