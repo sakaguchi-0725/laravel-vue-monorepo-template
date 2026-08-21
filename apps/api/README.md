@@ -88,6 +88,7 @@ apps/api/app/
 | `mise run migrate:up` | マイグレーションの適用 |
 | `mise run migrate:down` | マイグレーションを1つ戻す |
 | `mise run test` | テストの実行（PHPUnit / paratest による並列実行） |
+| `mise run ide:helper` | エディタ補完用ヘルパーの生成（Laravel のマジックメソッド解決） |
 | `mise run format` | PHP コードの整形（Pint） |
 | `mise run format:check` | 整形チェック（Pint、書き換えなし） |
 | `mise run lint` | 静的解析（PHPStan / Larastan / PHPat） |

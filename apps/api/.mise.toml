@@ -18,6 +18,10 @@ run = "docker compose exec api php artisan migrate"
 description = "マイグレーションを1つ戻す"
 run = "docker compose exec api php artisan migrate:rollback --step=1"
 
+[tasks."ide:helper"]
+description = "モデルの属性・スコープの PHPDoc をモデルファイルへ書き込む（エディタ補完用）"
+run = "docker compose exec api php artisan ide-helper:models -W"
+
 [tasks.test]
 description = "テストの実行（PHPUnit / paratest による並列実行）"
 run = "docker compose exec api php artisan test --parallel"

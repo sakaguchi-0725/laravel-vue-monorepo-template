@@ -12,6 +12,7 @@
         "laravel/tinker": "^3.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.7",
         "brianium/paratest": "^7.20.0",
         "fakerphp/faker": "^1.23",
         "hotmeteor/spectator": "^3.0",
