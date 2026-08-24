@@ -21,7 +21,7 @@ class ErrorResponseTest extends WebTestCase
         parent::setUp();
 
         Route::middleware('api')->prefix('api')->group(function (): void {
-            Route::post('/examples', fn () => throw new InvalidArgumentsException('name is blank'));
+            Route::get('/_errors/invalid-arguments', fn () => throw new InvalidArgumentsException('name is blank'));
             Route::get('/_errors/permission-denied', fn () => throw new PermissionDeniedException);
             Route::get('/_errors/not-found', fn () => throw new NotFoundException);
             Route::get('/_errors/conflict', fn () => throw new ConflictException);
@@ -40,14 +40,9 @@ class ErrorResponseTest extends WebTestCase
     #[Test]
     public function 引数不正の業務例外が400で返ること(): void
     {
-        $response = $this->postJson('/api/examples', [
-            'name' => '山田太郎',
-            'email' => 'taro@example.com',
-        ]);
+        $response = $this->getJson('/api/_errors/invalid-arguments');
 
-        $response->assertValidRequest()
-            ->assertValidResponse(400);
-
+        $response->assertStatus(400);
         $this->assertSame('INVALID_ARGUMENTS', $response->json('code'));
     }
 

@@ -1,9 +1,3 @@
-import { http } from './http.ts'
+import type { RequestHandler } from 'msw'
 
-export const handlers = [
-  http.post('/examples', async ({ request, response }) => {
-    const body = await request.json()
-
-    return response(200).json(body)
-  }),
-]
+export const handlers: RequestHandler[] = []

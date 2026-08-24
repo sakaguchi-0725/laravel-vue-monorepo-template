@@ -4,26 +4,6 @@
  */
 
 export type paths = {
-    "/examples": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * 送信された値をそのまま返す
-         * @description 受け取ったリクエストボディを検証し、同じ内容をそのまま返す。
-         */
-        post: operations["createExample"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/todos": {
         parameters: {
             query?: never;
@@ -56,20 +36,6 @@ export type paths = {
 export type webhooks = Record<string, never>;
 export type components = {
     schemas: {
-        /**
-         * @description エラーの種別を示すコード。
-         * @enum {string}
-         */
-        ErrorCode: "INVALID_ARGUMENTS" | "PERMISSION_DENIED" | "NOT_FOUND" | "CONFLICT" | "INTERNAL_ERROR";
-        /** @description エラーレスポンスの共通スキーマ。 */
-        Error: {
-            code: components["schemas"]["ErrorCode"];
-            /**
-             * @description エラーの内容を説明するメッセージ。
-             * @example リクエストの内容が正しくありません。
-             */
-            message: string;
-        };
         /**
          * @description タスクのステータス。
          *
@@ -106,6 +72,20 @@ export type components = {
         ListTodosResponse: {
             /** @description タスクの一覧。 */
             todos: components["schemas"]["Todo"][];
+        };
+        /**
+         * @description エラーの種別を示すコード。
+         * @enum {string}
+         */
+        ErrorCode: "INVALID_ARGUMENTS" | "PERMISSION_DENIED" | "NOT_FOUND" | "CONFLICT" | "INTERNAL_ERROR";
+        /** @description エラーレスポンスの共通スキーマ。 */
+        Error: {
+            code: components["schemas"]["ErrorCode"];
+            /**
+             * @description エラーの内容を説明するメッセージ。
+             * @example リクエストの内容が正しくありません。
+             */
+            message: string;
         };
         CreateTodoRequest: {
             /**
@@ -144,55 +124,6 @@ export type components = {
 };
 export type $defs = Record<string, never>;
 export interface operations {
-    createExample: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    /**
-                     * @description 名前
-                     * @example 山田太郎
-                     */
-                    name: string;
-                    /**
-                     * Format: email
-                     * @description メールアドレス
-                     * @example taro@example.com
-                     */
-                    email: string;
-                };
-            };
-        };
-        responses: {
-            /** @description 正常系 */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * @description 名前
-                         * @example 山田太郎
-                         */
-                        name: string;
-                        /**
-                         * Format: email
-                         * @description メールアドレス
-                         * @example taro@example.com
-                         */
-                        email: string;
-                    };
-                };
-            };
-            400: components["responses"]["BadRequest"];
-        };
-    };
     ListTodos: {
         parameters: {
             query?: {

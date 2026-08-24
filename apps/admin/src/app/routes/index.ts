@@ -1,6 +1,5 @@
 import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 
-import { ExamplePage } from '@/pages/example'
 import { todoRoutes } from './todo'
 
 export const createAppRouter = (mode: 'web' | 'memory') => {
@@ -11,8 +10,7 @@ export const createAppRouter = (mode: 'web' | 'memory') => {
     routes: [
       {
         path: '/',
-        name: 'example',
-        component: ExamplePage,
+        redirect: { name: 'todo.list' },
       },
       ...todoRoutes,
     ],
