@@ -21,6 +21,18 @@ run = "pnpm storybook"
 description = "Storybookのplay関数テスト（vitest browser）を実行"
 run = "pnpm test-storybook"
 
+[tasks.lint]
+description = "ESLintによる静的解析（FSDの依存方向チェックを含む）"
+run = "pnpm lint"
+
+[tasks.format]
+description = "Prettierによる整形"
+run = "pnpm exec prettier --write --ignore-path ../../.prettierignore ."
+
+[tasks.build]
+description = "型チェックと本番ビルド（vue-tsc -b && vite build）"
+run = "pnpm build"
+
 [tasks."lint:staged"]
 description = "指定ファイルにESLintを実行する（lefthook用）"
 run = "pnpm exec eslint --no-warn-ignored $@"
