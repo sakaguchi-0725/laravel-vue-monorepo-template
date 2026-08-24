@@ -5,6 +5,10 @@ run = [
   "pnpm exec playwright install chromium",
 ]
 
+[tasks.dev]
+description = "開発サーバーを起動"
+run = "pnpm dev"
+
 [tasks."api:docs"]
 description = "OpenAPI仕様書からHTMLドキュメントを生成して開く"
 run = "pnpm --package=@redocly/cli dlx redocly build-docs ../../docs/api/web/openapi.yml --output ../../docs/api/web.html && open ../../docs/api/web.html"

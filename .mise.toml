@@ -13,6 +13,10 @@ run = [
   "mise -C apps/api run setup",
 ]
 
+[tasks.dev]
+description = "全アプリの開発サーバーを起動"
+run = "mise -C apps/api run dev & mise -C apps/web run dev & mise -C apps/admin run dev & wait"
+
 [tasks."docker:up"]
 description = "コンテナの起動"
 run = "docker compose up -d"

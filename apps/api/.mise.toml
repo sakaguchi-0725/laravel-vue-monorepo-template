@@ -6,6 +6,10 @@ run = [
   "docker compose exec api php artisan migrate",
 ]
 
+[tasks.dev]
+description = "コンテナを起動してログを表示"
+run = "docker compose up"
+
 [tasks."migrate:new"]
 description = "マイグレーションファイルの作成"
 run = "docker compose exec api php artisan make:migration {{arg(name=\"name\")}}"
