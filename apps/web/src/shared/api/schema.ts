@@ -24,6 +24,34 @@ export type paths = {
         patch?: never;
         trace?: never;
     };
+    "/todos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * タスク一覧を取得する
+         * @description タスクを期限日の昇順で返す。
+         *
+         *     期限日が未設定のタスクは末尾に並ぶ。
+         */
+        get: operations["ListTodos"];
+        put?: never;
+        /**
+         * タスクを作成する
+         * @description タスクを新規作成する。
+         *
+         *     作成直後のステータスは常に `pending` になる。
+         */
+        post: operations["CreateTodo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 };
 export type webhooks = Record<string, never>;
 export type components = {
@@ -32,7 +60,7 @@ export type components = {
          * @description エラーの種別を示すコード。
          * @enum {string}
          */
-        ErrorCode: "INVALID_ARGUMENTS";
+        ErrorCode: "INVALID_ARGUMENTS" | "PERMISSION_DENIED" | "NOT_FOUND" | "CONFLICT" | "INTERNAL_ERROR";
         /** @description エラーレスポンスの共通スキーマ。 */
         Error: {
             code: components["schemas"]["ErrorCode"];
@@ -41,6 +69,61 @@ export type components = {
              * @example リクエストの内容が正しくありません。
              */
             message: string;
+        };
+        /**
+         * @description タスクのステータス。
+         *
+         *     `pending` は未完了、`done` は完了を表す。
+         * @example pending
+         * @enum {string}
+         */
+        TodoStatus: "pending" | "done";
+        /** @description タスク。 */
+        Todo: {
+            /**
+             * @description タスクのID。
+             * @example 1
+             */
+            id: number;
+            /**
+             * @description タスクの件名。
+             * @example 請求書を送付する
+             */
+            title: string;
+            /**
+             * @description タスクの詳細説明。
+             * @example 今月分の請求書をPDFにして送る。
+             */
+            description: string | null;
+            status: components["schemas"]["TodoStatus"];
+            /**
+             * Format: date
+             * @description 期限日。
+             * @example 2026-09-30
+             */
+            dueOn: string | null;
+        };
+        ListTodosResponse: {
+            /** @description タスクの一覧。 */
+            todos: components["schemas"]["Todo"][];
+        };
+        CreateTodoRequest: {
+            /**
+             * @description タスクの件名。
+             * @example 請求書を送付する
+             */
+            title: string;
+            /**
+             * @description タスクの詳細説明。
+             * @example 今月分の請求書をPDFにして送る。
+             */
+            description?: string | null;
+            /**
+             * Format: date
+             * @description 期限日。
+             * @example 2026-09-30
+             */
+            dueOn?: string | null;
         };
     };
     responses: {
@@ -105,6 +188,59 @@ export interface operations {
                          */
                         email: string;
                     };
+                };
+            };
+            400: components["responses"]["BadRequest"];
+        };
+    };
+    ListTodos: {
+        parameters: {
+            query?: {
+                /**
+                 * @description 指定したステータスのタスクだけに絞り込む。
+                 *
+                 *     省略した場合はすべてのステータスを返す。
+                 */
+                status?: components["schemas"]["TodoStatus"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 取得成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListTodosResponse"];
+                };
+            };
+            400: components["responses"]["BadRequest"];
+        };
+    };
+    CreateTodo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateTodoRequest"];
+            };
+        };
+        responses: {
+            /** @description 作成成功 */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Todo"];
                 };
             };
             400: components["responses"]["BadRequest"];
