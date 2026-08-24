@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { expect, userEvent, waitFor, within } from 'storybook/test'
 
 import { http } from '@/shared/api/mocks'
+import { expectRoute } from '@/shared/test'
 
 import type { Todo } from '../model/types'
 
@@ -136,5 +137,21 @@ export const FetchError: Story = {
     )
 
     await expect(canvas.queryByRole('heading', { level: 2 })).not.toBeInTheDocument()
+  },
+}
+
+export const CreateLink: Story = {
+  name: 'タスクを作成を押すと作成画面へ遷移すること',
+  parameters: {
+    msw: {
+      handlers: [http.get('/todos', ({ response }) => response(200).json({ todos }))],
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    await userEvent.click(await canvas.findByRole('link', { name: 'タスクを作成' }))
+
+    await expectRoute(canvasElement, '/todos/new')
   },
 }

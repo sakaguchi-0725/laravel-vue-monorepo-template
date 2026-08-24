@@ -6,7 +6,10 @@ const { status, rows, errorMessage, isLoading, statusFilterOptions } = useTodos(
 
 <template>
   <main class="page">
-    <h1 class="title">タスク一覧</h1>
+    <div class="head">
+      <h1 class="title">タスク一覧</h1>
+      <RouterLink class="create-link" :to="{ name: 'todo.create' }">タスクを作成</RouterLink>
+    </div>
 
     <div class="filter">
       <label class="label" for="status">ステータス</label>
@@ -40,10 +43,37 @@ const { status, rows, errorMessage, isLoading, statusFilterOptions } = useTodos(
   padding: 2rem 1rem;
 }
 
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
 .title {
   font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+}
+
+.create-link {
+  flex-shrink: 0;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.375rem;
+  background-color: #4f46e5;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.create-link:hover {
+  background-color: #4338ca;
+}
+
+.create-link:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
 }
 
 .filter {
