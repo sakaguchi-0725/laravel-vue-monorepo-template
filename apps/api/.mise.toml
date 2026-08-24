@@ -18,6 +18,10 @@ run = "docker compose exec api php artisan make:migration {{arg(name=\"name\")}}
 description = "マイグレーションの適用"
 run = "docker compose exec api php artisan migrate"
 
+[tasks."db:seed"]
+description = "シーダーの実行（開発用データの投入）"
+run = "docker compose exec api php artisan db:seed"
+
 [tasks."migrate:down"]
 description = "マイグレーションを1つ戻す"
 run = "docker compose exec api php artisan migrate:rollback --step=1"
