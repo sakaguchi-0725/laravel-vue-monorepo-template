@@ -32,6 +32,9 @@ const isQuotation = (value: unknown): value is Quotation =>
 ## 型定義
 
 - オブジェクト型は `type` で定義する。`interface` を使わない
+- 値が存在しないことは `undefined` で表す。`null` を使わない
+  - 例外は API のレスポンスなど外部から `null` が渡る場合のみ。その値を描画用の型に持ち込むときは
+    `?? undefined` で変換し、`null` をアプリ内部に広げない
 - `enum` を使わない。`as const` オブジェクトとユニオン型で表現する
 
 ```ts
