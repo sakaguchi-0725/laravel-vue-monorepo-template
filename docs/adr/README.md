@@ -31,3 +31,4 @@
 
 | No | タイトル | scope | Status | 日付 |
 | --- | --- | --- | --- | --- |
+| [0001](./0001-single-repository-for-web-admin-api.md) | web / admin / api を単一リポジトリに置く | infra | Accepted | 2026-08-25 |
