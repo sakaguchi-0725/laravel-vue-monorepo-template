@@ -34,3 +34,4 @@
 | [0001](./0001-single-repository-for-web-admin-api.md) | web / admin / api を単一リポジトリに置く | infra | Accepted | 2026-08-25 |
 | [0002](./0002-openapi-as-single-api-contract.md) | OpenAPI を唯一の API 契約とする | shared | Accepted | 2026-08-25 |
 | [0003](./0003-separate-api-surface-for-web-and-admin.md) | web / admin で API を分ける | shared | Accepted | 2026-08-25 |
+| [0004](./0004-three-layer-structure-for-api.md) | api を Http / UseCases / Models の3層にする | api | Accepted | 2026-08-25 |
