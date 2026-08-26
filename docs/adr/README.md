@@ -35,3 +35,4 @@
 | [0002](./0002-openapi-as-single-api-contract.md) | OpenAPI を唯一の API 契約とする | shared | Accepted | 2026-08-25 |
 | [0003](./0003-separate-api-surface-for-web-and-admin.md) | web / admin で API を分ける | shared | Accepted | 2026-08-25 |
 | [0004](./0004-three-layer-structure-for-api.md) | api を Http / UseCases / Models の3層にする | api | Accepted | 2026-08-25 |
+| [0005](./0005-adopt-feature-sliced-design-for-frontend.md) | フロントエンドに Feature-Sliced Design を採用する | shared | Accepted | 2026-08-26 |
