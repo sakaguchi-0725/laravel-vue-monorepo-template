@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Exceptions\ApplicationException;
 use App\Http\Errors\ErrorResponseFactory;
 use App\Http\Middleware\InitializeLogContext;
 use App\Http\Middleware\LogRequest;
@@ -9,6 +10,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Psr\Log\LogLevel;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -26,6 +28,12 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->trustProxies(at: env('TRUSTED_PROXIES', '*'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->level(ApplicationException::class, LogLevel::INFO);
+
+        // Laravel の internalDontReport に含まれるため既定では報告されないが、
+        // ErrorResponseFactory が 500 を返す実装バグなので ERROR として記録する。
+        $exceptions->stopIgnoring(ErrorResponseFactory::INTERNAL_ERROR_EXCEPTIONS);
+
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
