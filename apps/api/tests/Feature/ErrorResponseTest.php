@@ -8,8 +8,10 @@ use App\Exceptions\ConflictException;
 use App\Exceptions\InvalidArgumentsException;
 use App\Exceptions\NotFoundException;
 use App\Exceptions\PermissionDeniedException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Test;
 use RuntimeException;
@@ -34,6 +36,9 @@ class ErrorResponseTest extends WebTestCase
             ]));
             Route::get('/_errors/unexpected', fn () => throw new RuntimeException('DB credentials are invalid'));
             Route::get('/_errors/model-not-found', fn () => throw new ModelNotFoundException);
+            Route::get('/_errors/service-unavailable', fn () => abort(503));
+            Route::get('/_errors/authorization', fn () => throw new AuthorizationException('policy denied'));
+            Route::get('/_errors/token-mismatch', fn () => throw new TokenMismatchException);
         });
     }
 
@@ -123,14 +128,48 @@ class ErrorResponseTest extends WebTestCase
     }
 
     #[Test]
-    public function 許可されないメソッドが405ではなく500で返ること(): void
+    public function 許可されないメソッドが405で返ること(): void
     {
         config(['app.debug' => false]);
 
         $response = $this->postJson('/api/_errors/not-found');
 
-        $response->assertStatus(500);
+        $response->assertStatus(405);
+        $this->assertSame('INVALID_ARGUMENTS', $response->json('code'));
+    }
+
+    #[Test]
+    public function abortで指定したステータスが維持されること(): void
+    {
+        config(['app.debug' => false]);
+
+        $response = $this->getJson('/api/_errors/service-unavailable');
+
+        $response->assertStatus(503);
         $this->assertSame('INTERNAL_ERROR', $response->json('code'));
+    }
+
+    #[Test]
+    public function 認可の標準例外が403で返ること(): void
+    {
+        config(['app.debug' => false]);
+
+        $response = $this->getJson('/api/_errors/authorization');
+
+        $response->assertStatus(403);
+        $this->assertSame('PERMISSION_DENIED', $response->json('code'));
+        $response->assertDontSee('policy denied');
+    }
+
+    #[Test]
+    public function トークン不一致の標準例外が419で返ること(): void
+    {
+        config(['app.debug' => false]);
+
+        $response = $this->getJson('/api/_errors/token-mismatch');
+
+        $response->assertStatus(419);
+        $this->assertSame('INVALID_ARGUMENTS', $response->json('code'));
     }
 
     #[Test]
