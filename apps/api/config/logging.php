@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Logging\JsonFormatter;
+use App\Logging\SourceProcessor;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -129,7 +130,7 @@ return [
                     'card_number',
                 ],
             ],
-            'processors' => [PsrLogMessageProcessor::class],
+            'processors' => [PsrLogMessageProcessor::class, SourceProcessor::class],
         ],
 
         'syslog' => [
