@@ -113,6 +113,22 @@ return [
                 'stream' => 'php://stderr',
             ],
             'formatter' => env('LOG_STDERR_FORMATTER', JsonFormatter::class),
+            'formatter_with' => [
+                // ログ出力時にマスクしたいキーの一覧。
+                // 現在の値はダミーなので、プロジェクトで扱う項目に合わせて追加・削除する。
+                'maskedKeys' => [
+                    'name',
+                    'first_name',
+                    'last_name',
+                    'email',
+                    'address',
+                    'postal_code',
+                    'phone',
+                    'phone_number',
+                    'my_number',
+                    'card_number',
+                ],
+            ],
             'processors' => [PsrLogMessageProcessor::class],
         ],
 

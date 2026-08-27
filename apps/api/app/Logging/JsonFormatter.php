@@ -17,9 +17,21 @@ class JsonFormatter extends NormalizerFormatter
      */
     private const RESERVED_KEYS = ['time', 'level', 'level_value', 'message', 'context', 'exception'];
 
-    public function __construct()
+    private const MASK = '******';
+
+    /**
+     * @var list<string>
+     */
+    private readonly array $maskedKeys;
+
+    /**
+     * @param  list<string>  $maskedKeys
+     */
+    public function __construct(array $maskedKeys = [])
     {
         parent::__construct(DateTimeInterface::RFC3339_EXTENDED);
+
+        $this->maskedKeys = array_map(strtolower(...), $maskedKeys);
     }
 
     public function format(LogRecord $record): string
@@ -36,11 +48,14 @@ class JsonFormatter extends NormalizerFormatter
             'level' => $record->level->getName(),
             'level_value' => $record->level->value,
             'message' => $record->message,
-            ...$extra,
+            ...$this->mask($extra),
         ];
 
         if ($context !== []) {
-            $payload['context'] = $this->normalizeValue($context);
+            /** @var array<array<mixed>|bool|float|int|string|null> $normalized */
+            $normalized = $this->normalizeValue($context);
+
+            $payload['context'] = $this->mask($normalized);
         }
 
         if ($exception instanceof Throwable) {
@@ -48,5 +63,26 @@ class JsonFormatter extends NormalizerFormatter
         }
 
         return $this->toJson($payload)."\n";
+    }
+
+    /**
+     * @param  array<mixed>  $values
+     * @return array<mixed>
+     */
+    private function mask(array $values): array
+    {
+        foreach ($values as $key => $value) {
+            if (is_string($key) && in_array(strtolower($key), $this->maskedKeys, true)) {
+                $values[$key] = self::MASK;
+
+                continue;
+            }
+
+            if (is_array($value)) {
+                $values[$key] = $this->mask($value);
+            }
+        }
+
+        return $values;
     }
 }
