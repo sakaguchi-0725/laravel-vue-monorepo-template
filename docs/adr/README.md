@@ -36,3 +36,4 @@
 | [0003](./0003-separate-api-surface-for-web-and-admin.md) | web / admin で API を分ける | shared | Accepted | 2026-08-25 |
 | [0004](./0004-three-layer-structure-for-api.md) | api を Http / UseCases / Models の3層にする | api | Accepted | 2026-08-25 |
 | [0005](./0005-adopt-feature-sliced-design-for-frontend.md) | フロントエンドに Feature-Sliced Design を採用する | shared | Accepted | 2026-08-26 |
+| [0006](./0006-domain-exceptions-with-http-layer-mapping.md) | エラーを独自例外で表し HTTP 変換を Http 層に閉じる | api | Accepted | 2026-08-27 |
