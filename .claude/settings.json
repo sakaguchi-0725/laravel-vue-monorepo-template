@@ -24,6 +24,18 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/lint-changed-apps.sh\"",
+            "timeout": 300,
+            "statusMessage": "apps の差分に lint・format を実行中..."
+          }
+        ]
+      }
     ]
   }
 }
