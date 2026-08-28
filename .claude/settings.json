@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(./.prettierrc*)",
+      "Edit(./.prettierignore)",
+      "Edit(./prettier.config.*)",
+      "Edit(./**/eslint.config.*)",
+      "Edit(./**/.eslintrc*)",
+      "Edit(./**/.eslintignore)",
+      "Edit(./packages/eslint-config/**)",
+      "Edit(./apps/api/phpstan*.neon*)",
+      "Edit(./apps/api/tests/Architecture/**)",
+      "Edit(./apps/api/pint.json)"
+    ]
+  }
+}
