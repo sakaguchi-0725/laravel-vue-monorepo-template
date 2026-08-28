@@ -23,14 +23,13 @@
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="BROADCAST_CONNECTION" value="null"/>
         <env name="CACHE_STORE" value="array"/>
-        <!-- api コンテナが DB_* を環境変数で渡すため、force で上書きしないと無視される -->
-        <env name="DB_CONNECTION" value="mysql" force="true"/>
-        <env name="DB_HOST" value="test-db" force="true"/>
-        <env name="DB_PORT" value="3306" force="true"/>
-        <env name="DB_DATABASE" value="app" force="true"/>
-        <env name="DB_USERNAME" value="app" force="true"/>
-        <env name="DB_PASSWORD" value="password" force="true"/>
-        <env name="DB_URL" value="" force="true"/>
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_HOST" value="test-db"/>
+        <env name="DB_PORT" value="3306"/>
+        <env name="DB_DATABASE" value="app"/>
+        <env name="DB_USERNAME" value="app"/>
+        <env name="DB_PASSWORD" value="password"/>
+        <env name="DB_URL" value=""/>
         <!-- 突き合わせ先の OpenAPI 定義は apps/api の外にあり、compose.yml が /spec に渡している -->
         <env name="SPEC_SOURCE" value="local"/>
         <env name="SPEC_PATH" value="/spec"/>
