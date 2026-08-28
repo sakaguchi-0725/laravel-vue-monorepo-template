@@ -12,5 +12,18 @@
       "Edit(./apps/api/tests/Architecture/**)",
       "Edit(./apps/api/pint.json)"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/block-lefthook-bypass.sh\""
+          }
+        ]
+      }
+    ]
   }
 }
